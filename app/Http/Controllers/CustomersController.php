@@ -40,19 +40,18 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-        'first_name'    => 'required|max:100',
-        'middle_name'   => 'nullable|max:100',
-        'last_name'     => 'required|max:100',
-        'address'       => 'required',
-        'city'          => 'required',
-        'state'         => 'nullable',
-        'zip'           => 'nullable',
-        'title'         => 'required|max:4',
-        'phone_number'  => 'nullable',
-        'email_address' => 'nullable',
-        'website'       => 'nullable'
-        
-    ]);
+            'first_name'    => 'required|max:100',
+            'middle_name'   => 'nullable|max:100',
+            'last_name'     => 'required|max:100',
+            'address'       => 'required',
+            'city'          => 'required',
+            'state'         => 'nullable',
+            'zip'           => 'nullable',
+            'title'         => 'required|max:4',
+            'phone_number'  => 'nullable',
+            'email_address' => 'nullable',
+            'website'       => 'nullable',   
+        ]);
 
         $customer = new customer;
         $customer->first_name     = $request->first_name;
