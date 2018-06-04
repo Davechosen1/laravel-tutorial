@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 
-class customer extends Model
+class Customer extends Model
 {
     //
    /* public static registerCustomer(){
@@ -27,3 +27,4 @@ class customer extends Model
     }
     */
 }
+
