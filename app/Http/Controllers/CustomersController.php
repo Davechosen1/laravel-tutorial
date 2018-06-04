@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\customer;
+use App\Customer;
 use Illuminate\Http\Request;
 
 
 class CustomersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +16,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers=customer::all();
-
+        $customers = Customer::all();
         return view('customers.customerslist',compact('customers'));
     }
 
@@ -53,7 +53,7 @@ class CustomersController extends Controller
             'website'       => 'nullable',   
         ]);
 
-        $customer = new customer;
+        $customer = new Customer;
         $customer->first_name     = $request->first_name;
         $customer->middle_name    = $request->middle_name;
         $customer->last_name      = $request->last_name;
@@ -66,17 +66,17 @@ class CustomersController extends Controller
         $customer->email_address  = $request->email_address;
         $customer->website        = $request->website;
                 
-        if($customer->save())
+        if(!$customer->save()){
+            //handle with your logic
+        }
+
         return redirect('/customers/register');
-            //return view('customers.customerform');
-       
+        //return view('customers.customerform');
     }
 
     
     public function show($id)
-    {
-        //
-    }
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -85,9 +85,7 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+    {}
 
     /**
      * Update the specified resource in storage.
@@ -108,7 +106,5 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
+    {}
 }
