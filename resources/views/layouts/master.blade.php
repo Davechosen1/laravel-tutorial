@@ -36,8 +36,7 @@
   <body>
 
     
-     @include('layouts.nav')
-             
+     @include('layouts.nav')  
 
              <div class="container">
                  @yield('header')

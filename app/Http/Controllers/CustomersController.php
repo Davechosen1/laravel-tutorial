@@ -26,7 +26,7 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         return view('customers.customerform');
     }
 
@@ -68,10 +68,13 @@ class CustomersController extends Controller
                 
         if(!$customer->save()){
             //handle with your logic
+            //$user = User::create(request(['name', 'email', 'password']));
+            session()->flash('message','Customer NOT Registered');
+            return redirect('/customers/register');
         }
-
-        return redirect('/customers/register');
-        //return view('customers.customerform');
+            session()->flash('message','Customer Registered Succcessfully');
+            return redirect('/customers/register');
+            //return view('customers.customerform');
     }
 
     
