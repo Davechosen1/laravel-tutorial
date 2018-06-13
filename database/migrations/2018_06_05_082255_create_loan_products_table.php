@@ -19,6 +19,7 @@ class CreateLoanProductsTable extends Migration
             $table->string('interest_method');
             $table->decimal('interest_rate', 3, 2);
             $table->decimal('penalty_rate', 3, 2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

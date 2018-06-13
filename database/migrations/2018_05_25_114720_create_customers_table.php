@@ -26,6 +26,7 @@ class CreateCustomersTable extends Migration
             $table->string('phone_number');
             $table->string('email_address');
             $table->string('website');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

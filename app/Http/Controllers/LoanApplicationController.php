@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\LoanApplication;
+use App\LoanProducts;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class LoanApplicationController extends Controller
@@ -14,8 +16,12 @@ class LoanApplicationController extends Controller
      */
     public function index()
     {
-        $loanapplication = LoanApplication::all();
-        return view('loans.loanapplicationslist',compact('loanapplication'));
+        //$loanapplication = LoanApplication::all();
+        $loan_application = LoanApplication::with('customer')
+            ->with('loan_products')
+            ->get();
+        return view('loans.loanapplicationslist',compact('loan_application'));
+        //return LoanApplication::allLoanApplications();
     }
 
     /**
@@ -24,8 +30,11 @@ class LoanApplicationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('loans.loanapplication');
+    {   
+        $loanproducts = LoanProducts::all();
+        $customers    = Customer::all();
+        return view('loans.loanapplication',compact(['loanproducts','customers']));
+        allLoanApplications();
     }
 
     /**
@@ -47,6 +56,7 @@ class LoanApplicationController extends Controller
         ]);
 
         $loan_application = new LoanApplication;
+        $loan_application->customer_id     = $request->customer_id;
         $loan_application->loan_product_id = $request->loan_product_id;
         $loan_application->amount          = $request->amount;
         $loan_application->period          = $request->period;
@@ -103,6 +113,6 @@ class LoanApplicationController extends Controller
      */
     public function destroy(loan_application $loan_application)
     {
-        //
+        return LoanApplication::destroy($loan_application);
     }
 }

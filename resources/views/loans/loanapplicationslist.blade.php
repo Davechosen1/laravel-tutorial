@@ -29,11 +29,11 @@
                 </thead>
                 <tbody>
                   <?php $n=1; ?>
-                  @foreach($loanapplication as $loan)
+                  @foreach($loan_application as $loan)
                   <tr>
                     <td>{{ $n++}}</td>
-                    <td>{{ $loan->customer_id }}</td>
-                    <td>{{ $loan->loan_product_id }}</td>
+                    <td>{{ $loan->customer !== null ? $loan->customer->first_name : 'No customer' }}</td>
+                    <td>{{ $loan->loan_products !== null ? $loan->loan_products->product_name : 'No Product' }}</td>
                     <td>{{ $loan->amount }}</td>
                     <td>{{ $loan->period }}</td>
                     <td>{{ $loan->date }}</td>

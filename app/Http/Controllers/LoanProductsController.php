@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LoanProducts;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoanProductRequest;
 
 class LoanProductsController extends Controller
 {
@@ -34,15 +34,9 @@ class LoanProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoanProductRequest $request)
     {
-        $this->validate(request(),[
-            'product_name'    => 'required|max:100',
-            'interest_method' => 'required',
-            'interest_rate'   => 'required',
-            'penalty_rate'    => 'required',   
-        ]);
-
+        
         $product = new LoanProducts;
         $product->product_name    = $request->product_name;
         $product->interest_method = $request->interest_method;
@@ -103,6 +97,6 @@ class LoanProductsController extends Controller
      */
     public function destroy(loan_products $loan_products)
     {
-        //
+       return LoanApplication::destroy($id);
     }
 }
