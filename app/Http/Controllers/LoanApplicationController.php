@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\LoanApplication;
-use App\LoanProducts;
-use App\Customer;
+use App\Models\LoanApplication;
+use App\Models\LoanProducts;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class LoanApplicationController extends Controller
@@ -16,12 +16,10 @@ class LoanApplicationController extends Controller
      */
     public function index()
     {
-        //$loanapplication = LoanApplication::all();
         $loan_application = LoanApplication::with('customer')
             ->with('loan_products')
             ->get();
         return view('loans.loanapplicationslist',compact('loan_application'));
-        //return LoanApplication::allLoanApplications();
     }
 
     /**
@@ -63,12 +61,12 @@ class LoanApplicationController extends Controller
         $loan_application->date            = $request->date;
 
         if(!$loan_application->save()){
+
             session()->flash('message','Loan Application NOT Registered');
             return redirect('/loan-application/register');
         }
-            session()->flash('message','Loan Application Succcessful');
-            return redirect('/loan-application/register');
-            //return view('loanproducts.loanproductsform');
+        session()->flash('message','Loan Application Succcessful');
+        return redirect('/loan-application/register');
     }
 
     /**

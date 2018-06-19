@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 
@@ -67,22 +67,19 @@ class CustomersController extends Controller
         $customer->website        = $request->website;
                 
         if(!$customer->save()){
-            //handle with your logic
-            //$user = User::create(request(['name', 'email', 'password']));
+           
             session()->flash('message','Customer NOT Registered');
-            return redirect('/customers/register');
+            return redirect()->back();
         }
-            session()->flash('message','Customer Registered Succcessfully');
-            return redirect('/customers/register');
-            //return view('customers.customerform');
+        
+        session()->flash('message','Customer Registered Succcessfully');
+        return redirect('/customers/create');
     }
 
     
     public function show(Customer $customer)
     {
-
-            //$customer = Customer::find($customer_id);
-            return view('customers.customershow',compact('customer'));
+        return view('customers.customershow',compact('customer'));
     }
 
     /**
@@ -106,7 +103,7 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this->validate(request(),[
+        $this->validate(request(),[
             'first_name'    => 'required|max:100',
             'middle_name'   => 'nullable|max:100',
             'last_name'     => 'required|max:100',
@@ -120,7 +117,6 @@ class CustomersController extends Controller
             'website'       => 'nullable',   
         ]);
 
-        //$customer = new Customer;
         $customer = Customer::find($id);
         $customer->first_name     = $request->first_name;
         $customer->middle_name    = $request->middle_name;
@@ -135,13 +131,13 @@ class CustomersController extends Controller
         $customer->website        = $request->website;
                 
         if(!$customer->save()){
-            //handle with your logic
-            //$user = User::create(request(['name', 'email', 'password']));
+
             session()->flash('message','Customer Details NOT Updated');
-            return redirect('/customers/list');
+            return back();
         }
-            session()->flash('message','Customer Details Updated Succcessfully');
-            return redirect('/customers/list');
+        
+        session()->flash('message','Customer Details Updated Succcessfully');
+        return redirect('/customers');
     }
 
     /**
@@ -153,7 +149,7 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         Customer::destroy($id);
-        return $this->index() 
-                    ->with('message','Customer deleted successfully');;
+        session()->flash('message','Customer Deleted Succcessfully');
+        return redirect('/customers');
     }
 }

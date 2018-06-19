@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-		use SoftDeletes;
-		protected $dates = ['deleted_at'];
+	use SoftDeletes;
+	
+	protected $dates = ['deleted_at'];
    
-    
-   public function loan_application()
-   {   
+    public function loan_application()
+    {   
    		return $this->hasMany(LoanApplication::class);
-   }
+    }
 }
 

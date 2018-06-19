@@ -23,14 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //customer routes
-Route::get('customers/register', 'CustomersController@create'); //register
-Route::post('customers', 'CustomersController@store'); //save
-Route::get('customers/list', 'CustomersController@index'); //all
-Route::get('customers/{customer}', 'CustomersController@show');// find specific
-Route::get('customers/{id}/edit', 'CustomersController@edit');//edit
-Route::patch('customers/{id}/edit', 'CustomersController@update');//edit
-Route::delete('customers/{id}/delete', 'CustomersController@destroy');//delete
-Route::get('customers/newpage', 'CustomersController@newlayout');
+Route::resource('customers', 'CustomersController');
 
 //loan product routes
 Route::get('loan-products/register', 'LoanProductsController@create');

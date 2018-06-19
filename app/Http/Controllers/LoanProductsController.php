@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\LoanProducts;
+use App\Models\LoanProducts;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\LoanProductRequest;
 
 class LoanProductsController extends Controller
@@ -42,17 +43,13 @@ class LoanProductsController extends Controller
         $product->interest_method = $request->interest_method;
         $product->interest_rate   = $request->interest_rate;
         $product->penalty_rate    = $request->penalty_rate;
-                    
 
-                   // dd($product);
         if(!$product->save()){
             session()->flash('message','Loan Product NOT Registered');
             return redirect('/loan-products/register');
         }
-            session()->flash('message','Customer Registered Succcessfully');
-            return redirect('/loan-products/register');
-            //return view('loanproducts.loanproductsform');
-
+        session()->flash('message','Customer Registered Succcessfully');
+        return redirect('/loan-products/register');
     }
 
     /**
@@ -74,7 +71,7 @@ class LoanProductsController extends Controller
      */
     public function edit(loan_products $loan_products)
     {
-        //
+    
     }
 
     /**
@@ -86,7 +83,7 @@ class LoanProductsController extends Controller
      */
     public function update(Request $request, loan_products $loan_products)
     {
-        //
+    
     }
 
     /**

@@ -26,8 +26,8 @@ class LoanProductRequest extends FormRequest
         return [
             'product_name'    => 'required|max:100',
             'interest_method' => 'required',
-            'interest_rate'   => 'required',
-            'penalty_rate'    => 'required',
+            'interest_rate'   => 'required|numeric|between:0.00,10.99',
+            'penalty_rate'    => 'required|numeric|between:0.00,10.99',
         ];
     }
 }

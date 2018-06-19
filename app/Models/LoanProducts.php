@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LoanProducts extends Model
 {
-    	use SoftDeletes;
-		protected $dates = ['deleted_at'];
+   
 }

@@ -26,15 +26,16 @@
             
     @include('layouts.errors')
         {{-- //@foreach($individual as $customer) --}}
-            <form method="POST" action="/customers/{{ $customer->id }}/edit">
+            <form method="POST" action="/customers/{{ $customer->id }}">
                 {{ csrf_field() }}
-                {{method_field('PATCH')}}
+                {{ method_field('PATCH') }}
+
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" name="first_name" 
-                            value={{ $customer->first_name }}
+                            value="{{ $customer->first_name }}"
                             class="form-control">
                         </div>
                         <div class="col-sm-4 form-group">
@@ -50,69 +51,66 @@
                             class="form-control">
                         </div>
                     </div>    
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <textarea name="address" rows="3"
-                        class="form-control"
-                        >
-                        {{ $customer->address }}
-                    </textarea>
-                </div>  
-                <div class="row">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea name="address" rows="3" 
+                            class="form-control">{{ $customer->address }}</textarea>
+                    </div>  
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                        <label for="city">City</label>
+                        <input type="text" name="city" 
+                        value={{ $customer->city }}
+                        class="form-control">
+                    </div>  
                     <div class="col-sm-4 form-group">
-                    <label for="city">City</label>
-                    <input type="text" name="city" 
-                    value={{ $customer->city }}
-                    class="form-control">
-                </div>  
-                <div class="col-sm-4 form-group">
-                    <label for="state">State</label>
-                    <input type="text" name="state" 
-                    value={{ $customer->state }}
-                    class="form-control">
-                </div>  
-                <div class="col-sm-4 form-group">
-                    <label for="zip">Zip</label>
-                    <input type="text" name="zip" 
-                    value={{ $customer->zip }}
-                    class="form-control">
-                </div>    
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" 
-                    value={{ $customer->title }}
-                    class="form-control">
-                </div>    
-                    <div class="col-sm-6 form-group">
-                    <label for="company">Company</label>
-                    <input type="text" name="company" 
-                    value='{{ $customer->company }}'
-                     class="form-control">
-                </div>  
-                </div>       
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" name="phone_number" 
-                    value={{ $customer->phone_number }}
-                    class="form-control">
-                </div>    
-                <div class="form-group">
-                    <label for="emailAddress">Email Address</label>
-                    <input type="text" name="email_address" 
-                    value={{ $customer->email_address }}
-                    class="form-control">
-                </div>  
-                <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="text" name="website" 
-                    value={{ $customer->website }}
-                    class="form-control">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-info">Edit</button>         
-                </div>
+                        <label for="state">State</label>
+                        <input type="text" name="state" 
+                        value={{ $customer->state }}
+                        class="form-control">
+                    </div>  
+                    <div class="col-sm-4 form-group">
+                        <label for="zip">Zip</label>
+                        <input type="text" name="zip" 
+                        value={{ $customer->zip }}
+                        class="form-control">
+                    </div>    
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" 
+                        value={{ $customer->title }}
+                        class="form-control">
+                    </div>    
+                        <div class="col-sm-6 form-group">
+                        <label for="company">Company</label>
+                        <input type="text" name="company" 
+                        value='{{ $customer->company }}'
+                         class="form-control">
+                    </div>  
+                    </div>       
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" name="phone_number" 
+                        value={{ $customer->phone_number }}
+                        class="form-control">
+                    </div>    
+                    <div class="form-group">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="text" name="email_address" 
+                        value={{ $customer->email_address }}
+                        class="form-control">
+                    </div>  
+                    <div class="form-group">
+                        <label for="website">Website</label>
+                        <input type="text" name="website" 
+                        value={{ $customer->website }}
+                        class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-info">Edit</button>         
+                    </div>
                 </div>
             </form> 
         {{-- @endforeach --}}

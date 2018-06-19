@@ -6,7 +6,11 @@
 
           <div class="blog-post">
             <h2 class="blog-post-title">List Of All Customers </h2>
-            
+            @if ($flash=session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ $flash }}
+            </div>
+            @endif
           </div>
             
          @include('layouts.errors')
@@ -46,22 +50,20 @@
                     <td>{{ $customer->email_address }}</td>
                     <td>{{ $customer->website }}</td>
                     <td>
-                          <form method="GET" action="/customers/{{ $customer->id }}/edit"> 
-                          
-                           
-                            <input type="submit" class="btn btn-primary" value="Edit"/>
-                          </form>     
+                        <a href="/customers/{{ $customer->id }}/edit" class="btn btn-primary">Edit</a>
                     </td>
                     <td>
-                          <form action="/customers/{{ $customer->id }}/delete" method="POST">
-                          {{method_field('DELETE')}}
-                          {{ csrf_field() }}
+                        <form action="/customers/{{ $customer->id }}" method="POST">
+                            {{method_field('DELETE')}}
+                            {{ csrf_field() }}
+                            
                             <input type="submit" class="btn btn-danger" value="Delete"/>
-                          </form><a href="/customers/{{ $customer->id }}/delete">
+                        </form><a href="/customers/{{ $customer->id }}/delete">
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
+                
               </table>
             
             </div>
