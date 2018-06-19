@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\customer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 
 class CustomersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +16,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers=customer::all();
-
+        $customers = Customer::all();
         return view('customers.customerslist',compact('customers'));
     }
 
@@ -26,7 +26,7 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         return view('customers.customerform');
     }
 
@@ -53,7 +53,7 @@ class CustomersController extends Controller
             'website'       => 'nullable',   
         ]);
 
-        $customer = new customer;
+        $customer = new Customer;
         $customer->first_name     = $request->first_name;
         $customer->middle_name    = $request->middle_name;
         $customer->last_name      = $request->last_name;
@@ -66,16 +66,20 @@ class CustomersController extends Controller
         $customer->email_address  = $request->email_address;
         $customer->website        = $request->website;
                 
-        if($customer->save())
-        return redirect('/customers/register');
-            //return view('customers.customerform');
-       
+        if(!$customer->save()){
+           
+            session()->flash('message','Customer NOT Registered');
+            return redirect()->back();
+        }
+        
+        session()->flash('message','Customer Registered Succcessfully');
+        return redirect('/customers/create');
     }
 
     
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        return view('customers.customershow',compact('customer'));
     }
 
     /**
@@ -86,7 +90,8 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('customers.customereditform',compact('customer'));
     }
 
     /**
@@ -98,7 +103,41 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),[
+            'first_name'    => 'required|max:100',
+            'middle_name'   => 'nullable|max:100',
+            'last_name'     => 'required|max:100',
+            'address'       => 'required',
+            'city'          => 'required',
+            'state'         => 'nullable',
+            'zip'           => 'nullable',
+            'title'         => 'required|max:4',
+            'phone_number'  => 'nullable',
+            'email_address' => 'nullable',
+            'website'       => 'nullable',   
+        ]);
+
+        $customer = Customer::find($id);
+        $customer->first_name     = $request->first_name;
+        $customer->middle_name    = $request->middle_name;
+        $customer->last_name      = $request->last_name;
+        $customer->address        = $request->address;
+        $customer->city           = $request->city;
+        $customer->state          = $request->state;
+        $customer->zip            = $request->zip;
+        $customer->title          = $request->title;
+        $customer->phone_number   = $request->phone_number;
+        $customer->email_address  = $request->email_address;
+        $customer->website        = $request->website;
+                
+        if(!$customer->save()){
+
+            session()->flash('message','Customer Details NOT Updated');
+            return back();
+        }
+        
+        session()->flash('message','Customer Details Updated Succcessfully');
+        return redirect('/customers');
     }
 
     /**
@@ -109,6 +148,8 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Customer::destroy($id);
+        session()->flash('message','Customer Deleted Succcessfully');
+        return redirect('/customers');
     }
 }

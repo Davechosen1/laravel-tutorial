@@ -38,14 +38,14 @@
     
      @include('layouts.nav')  
 
-             <div class="container">
+             
                  @yield('header')
                  <hr>
                 <div class="row">
                  @yield('content')               
                  @yield('sidebar')
                 </div>
-             </div>
+             
      
      
      @include('layouts.footer')

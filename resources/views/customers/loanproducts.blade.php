@@ -3,7 +3,7 @@
 
     <div class="blog-header">
         <h1 class="blog-title">Customers</h1>
-        <p class="lead blog-description">This is the customers registration page</p>
+        <p class="lead blog-description">This is the loan products registration page</p>
         <div class="col-sm-8 blog-main">
         @if ($flash=session('message'))
             <div class="alert alert-success" role="alert">
@@ -18,9 +18,9 @@
 @section ('content')
     <div class="col-sm-8 blog-main">
         <div class="blog-post">
-            <h2 class="blog-post-title">Registration Form</h2>
+            <h2 class="blog-post-title">Loan Products Form</h2>
             <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-            <p>Collect and register customer details using the form below</p>
+            <p>Register Loan Product Details Uing The Form Below</p>
             <hr>
         </div>
             
@@ -30,20 +30,20 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-4 form-group">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName">Product Name</label>
                     <input type="text" name="first_name" placeholder="Enter First Name Here.." class="form-control">
                     </div>
             <div class="col-sm-4 form-group">
-                <label for="middleName">Middle Name</label>
+                <label for="middleName">Interest Method</label>
                 <input type="text" name="middle_name" placeholder="Enter Middle Name Here.." class="form-control">
             </div>
             <div class="col-sm-4 form-group">
-                <label for="lastName">Last Name</label>
+                <label for="lastName">Interest Rate</label>
                 <input type="text" name="last_name" placeholder="Enter Last Name Here.." class="form-control">
             </div>
             </div>    
             <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address">Penalty Rate</label>
                 <textarea name="address" placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
             </div>  
             <div class="row">
