@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoanProducts;
+use App\Models\LoanProduct;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\LoanProductRequest;
 
@@ -15,7 +15,7 @@ class LoanProductsController extends Controller
      */
     public function index()
     {
-        $loanproducts = LoanProducts::all();
+        $loanproducts = LoanProduct::all();
         return view('loanproducts.loanproductslist',compact('loanproducts'));
     }
 
@@ -35,14 +35,10 @@ class LoanProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LoanProductRequest $request)
+    public function store(StoreLoanProductRequest $request)
     {
-        
-        $product = new LoanProducts;
-        $product->product_name    = $request->product_name;
-        $product->interest_method = $request->interest_method;
-        $product->interest_rate   = $request->interest_rate;
-        $product->penalty_rate    = $request->penalty_rate;
+        $product = new LoanProduct;
+        $product->$request->all();
 
         if(!$product->save()){
             session()->flash('message','Loan Product NOT Registered');
@@ -55,12 +51,12 @@ class LoanProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\loan_products  $loan_products
+     * @param  \App\Model\LoanProduct $loan_product
      * @return \Illuminate\Http\Response
      */
-    public function show(loan_products $loan_products)
+    public function show(LoanProduct $loan_product)
     {
-        //
+        return view('some.view', compact('loan_product'));
     }
 
     /**
@@ -81,7 +77,7 @@ class LoanProductsController extends Controller
      * @param  \App\loan_products  $loan_products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, loan_products $loan_products)
+    public function update(LoanProductRequest $request, LoanProduct $loan_products)
     {
     
     }

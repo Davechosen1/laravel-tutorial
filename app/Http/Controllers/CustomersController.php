@@ -4,16 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreCustomerRequest;
 
 class CustomersController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $customers = Customer::all();
@@ -26,46 +21,14 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         return view('customers.customerform');
     }
-
-
-    public function newlayout()
+       
+    public function store(StoreCustomerRequest $request)
     {
-        return view('customers.layout');
-    }
-
-   
-    public function store(Request $request)
-    {
-        $this->validate(request(),[
-            'first_name'    => 'required|max:100',
-            'middle_name'   => 'nullable|max:100',
-            'last_name'     => 'required|max:100',
-            'address'       => 'required',
-            'city'          => 'required',
-            'state'         => 'nullable',
-            'zip'           => 'nullable',
-            'title'         => 'required|max:4',
-            'phone_number'  => 'nullable',
-            'email_address' => 'nullable',
-            'website'       => 'nullable',   
-        ]);
-
-        $customer = new Customer;
-        $customer->first_name     = $request->first_name;
-        $customer->middle_name    = $request->middle_name;
-        $customer->last_name      = $request->last_name;
-        $customer->address        = $request->address;
-        $customer->city           = $request->city;
-        $customer->state          = $request->state;
-        $customer->zip            = $request->zip;
-        $customer->title          = $request->title;
-        $customer->phone_number   = $request->phone_number;
-        $customer->email_address  = $request->email_address;
-        $customer->website        = $request->website;
-                
+        $customer = new Customer($request->except('company'));
+                    
         if(!$customer->save()){
            
             session()->flash('message','Customer NOT Registered');

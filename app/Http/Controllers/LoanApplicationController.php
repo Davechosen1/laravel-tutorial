@@ -43,25 +43,11 @@ class LoanApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $this->validate(request(),[
-            'loan_product_id' => 'required',
-            'amount'          => 'required',
-            'period'          => 'required',
-            'date'            => 'required', 
-            'customer_id'     => 'nullable',
-            'loan_product_id' => 'nullable',
-        ]);
-
         $loan_application = new LoanApplication;
-        $loan_application->customer_id     = $request->customer_id;
-        $loan_application->loan_product_id = $request->loan_product_id;
-        $loan_application->amount          = $request->amount;
-        $loan_application->period          = $request->period;
-        $loan_application->date            = $request->date;
+        $loan_application->$request->all();
 
         if(!$loan_application->save()){
-
+            
             session()->flash('message','Loan Application NOT Registered');
             return redirect('/loan-application/register');
         }
