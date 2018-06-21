@@ -26,7 +26,7 @@
             
     @include('layouts.errors')
   
-        <form method="POST" action="/loan-application">
+        <form method="POST" action="/loan-applications">
             {{ csrf_field() }}
             <div class="col-sm-12">
             

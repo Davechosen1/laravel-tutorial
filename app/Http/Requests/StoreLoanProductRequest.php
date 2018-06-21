@@ -24,7 +24,10 @@ class StoreLoanProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'product_name'    => 'required|max:100',
+            'interest_method' => 'required',
+            'interest_rate'   => 'required|numeric|between:0.00,10.99',
+            'penalty_rate'    => 'required|numeric|between:0.00,10.99',
         ];
     }
 }

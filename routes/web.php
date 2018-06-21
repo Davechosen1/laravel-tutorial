@@ -15,13 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('customerregistration', function () {
-    return view('customers/customerform');
-});
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::resource('customers', 'CustomersController');
 Route::resource('loan-products', 'LoanProductsController');
-Route::resource('loan-application', 'LoanApplicationController');
+Route::resource('loan-applications', 'LoanApplicationsController');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LoanProduct;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\LoanProductRequest;
+use App\Http\Requests\StoreLoanProductRequest;
 
 class LoanProductsController extends Controller
 {
@@ -37,15 +37,14 @@ class LoanProductsController extends Controller
      */
     public function store(StoreLoanProductRequest $request)
     {
-        $product = new LoanProduct;
-        $product->$request->all();
-
+        $product = new LoanProduct($request->all());
+    
         if(!$product->save()){
             session()->flash('message','Loan Product NOT Registered');
-            return redirect('/loan-products/register');
+            return redirect('/loan-products/create');
         }
-        session()->flash('message','Customer Registered Succcessfully');
-        return redirect('/loan-products/register');
+        session()->flash('message','Loan Product Registered Succcessfully');
+        return redirect('/loan-products/create');
     }
 
     /**

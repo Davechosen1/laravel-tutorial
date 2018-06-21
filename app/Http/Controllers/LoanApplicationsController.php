@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoanApplication;
-use App\Models\LoanProducts;
+use App\Models\LoanProduct;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreLoanApplicationRequest;
 
-class LoanApplicationController extends Controller
+class LoanApplicationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +30,7 @@ class LoanApplicationController extends Controller
      */
     public function create()
     {   
-        $loanproducts = LoanProducts::all();
+        $loanproducts = LoanProduct::all();
         $customers    = Customer::all();
         return view('loans.loanapplication',compact(['loanproducts','customers']));
         allLoanApplications();
@@ -41,18 +42,17 @@ class LoanApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLoanApplicationRequest $request)
     {
-        $loan_application = new LoanApplication;
-        $loan_application->$request->all();
-
+        $loan_application = new LoanApplication($request->all());
+        
         if(!$loan_application->save()){
             
             session()->flash('message','Loan Application NOT Registered');
-            return redirect('/loan-application/register');
+            return redirect('/loan-applications/create');
         }
         session()->flash('message','Loan Application Succcessful');
-        return redirect('/loan-application/register');
+        return redirect('/loan-applications/create');
     }
 
     /**
