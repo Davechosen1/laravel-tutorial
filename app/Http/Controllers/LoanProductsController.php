@@ -76,7 +76,7 @@ class LoanProductsController extends Controller
      * @param  \App\loan_products  $loan_products
      * @return \Illuminate\Http\Response
      */
-    public function update(LoanProductRequest $request, LoanProduct $loan_products)
+    public function update(StoreLoanProductRequest $request, LoanProduct $loan_products)
     {
     
     }

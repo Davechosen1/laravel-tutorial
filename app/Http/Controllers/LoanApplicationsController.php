@@ -84,7 +84,7 @@ class LoanApplicationsController extends Controller
      * @param  \App\loan_application  $loan_application
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, loan_application $loan_application)
+    public function update(StoreLoanApplicationRequest $request, loan_application $loan_application)
     {
         //
     }

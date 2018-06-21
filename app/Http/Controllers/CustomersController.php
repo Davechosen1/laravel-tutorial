@@ -64,23 +64,9 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCustomerRequest $request, $id)
     {
-        $this->validate(request(),[
-            'first_name'    => 'required|max:100',
-            'middle_name'   => 'nullable|max:100',
-            'last_name'     => 'required|max:100',
-            'address'       => 'required',
-            'city'          => 'required',
-            'state'         => 'nullable',
-            'zip'           => 'nullable',
-            'title'         => 'required|max:4',
-            'phone_number'  => 'nullable',
-            'email_address' => 'nullable',
-            'website'       => 'nullable',   
-        ]);
-
-        $customer = Customer::find($id);
+        $customer                 = Customer::find($id);
         $customer->first_name     = $request->first_name;
         $customer->middle_name    = $request->middle_name;
         $customer->last_name      = $request->last_name;
